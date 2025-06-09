@@ -1,0 +1,15 @@
+# 忽略 node_modules 目录
+node_modules/
+# 忽略 .env 文件
+.env
+# 忽略日志文件
+logs/
+# 忽略打包文件
+dist/
+
+.idea/
+.vscode/
+# 忽略临时文件
+*.tmp
+# 忽略临时文件
+*.lock
