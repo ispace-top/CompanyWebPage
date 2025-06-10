@@ -31,6 +31,11 @@ const fetchData = async () => {
     const res = await getSiteInfo();
     siteInfo.value = res.data || {};
     console.log('[App] 网站信息获取成功', siteInfo.value);
+    
+    // 动态更新主题色
+    if (siteInfo.value.theme_color) {
+      document.documentElement.style.setProperty('--primary-color', siteInfo.value.theme_color);
+    }
   } catch (err) {
     console.error('[App] 获取网站信息失败:', err);
     error.value = err.message || '未知错误';

@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer" :style="{ background: siteInfo.theme_color }">
+  <footer class="footer">
     <div class="container">
       <p class="copyright">{{ siteInfo.copyright }}</p>
       <p class="record">{{ siteInfo.record_number }}</p>
@@ -23,9 +23,9 @@ const props = defineProps({
 
 <style scoped>
 .footer {
-  padding: 2rem 0;
-  color: white;
+  background: var(--primary-color);
+  padding: var(--spacing-lg) 0;
+  color: var(--text-light);
   text-align: center;
-  margin-top: 2rem;
 }
 </style>

@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router' // 1. 导入路由
+import router from './router/index'
+import './styles/theme.less' // 修改为 LESS 文件
 
-const app = createApp(App)
-
-app.use(router) // 2. 在应用实例上注册路由
-
-app.mount('#app') // 3. 挂载应用
+const app = createApp(App);
+app.use(router);
+app.mount('#app');

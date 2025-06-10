@@ -1,0 +1,33 @@
+// 全局样式重置
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+// 主题变量
+@primary-color: #2D3446;
+@secondary-color: #3a4157;
+@text-light: #ffffff;
+@text-dark: #333333;
+@bg-light: #f8f8f8;
+@bg-dark: #2d3436;
+@spacing-sm: 0.5rem;
+@spacing-md: 1rem;
+@spacing-lg: 2rem;
+@border-radius: 4px;
+@box-shadow: 0 4px 8px rgba(45, 52, 70, 0.2);
+
+// 应用变量
+:root {
+  --primary-color: @primary-color;
+  --secondary-color: @secondary-color;
+  --text-light: @text-light;
+  --text-dark: @text-dark;
+  --bg-light: @bg-light;
+  --bg-dark: @bg-dark;
+  --spacing-sm: @spacing-sm;
+  --spacing-md: @spacing-md;
+  --spacing-lg: @spacing-lg;
+  --border-radius: @border-radius;
+  --box-shadow: @box-shadow;
+}

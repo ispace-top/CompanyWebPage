@@ -74,34 +74,39 @@ exports.checkInitialized = async (req, res) => {
 exports.setup = async (req, res) => {
   const { siteTitle, adminPassword } = req.body;
 
-  // 防止重复初始化
-  const existingSite = await SiteInfo.findOne();
-  if (existingSite) {
-    logger.warn('重复初始化请求');
-    return res.status(400).json({ message: '网站已初始化' });
+  try {
+    // 1. 检查管理员是否已存在
+    const existingAdmin = await User.findOne({ where: { username: 'admin' } });
+    if (existingAdmin) {
+      logger.warn('管理员账号已存在');
+      return res.status(400).json({ message: '管理员账号已存在' });
+    }
+
+    // 2. 保存网站基础信息
+    await SiteInfo.create({
+      site_title: siteTitle,
+      component_config: {
+        header: true,
+        banner: true,
+        product_intro: true,
+        customer_case: true,
+        footer: true
+      },
+      theme_color: '#2D3446' // 默认主题色
+    });
+
+    // 3. 创建管理员账号（密码加密存储）
+    const hashedPassword = await bcrypt.hash(adminPassword, 10);
+    await User.create({
+      username: 'admin',
+      password: hashedPassword,
+      is_admin: true
+    });
+
+    logger.info('网站初始化成功');
+    res.json({ message: '初始化成功' });
+  } catch (error) {
+    logger.error(`初始化失败: ${error.message}`);
+    res.status(500).json({ message: '初始化失败' });
   }
-
-  // 1. 保存网站基础信息
-  await SiteInfo.create({
-    site_title: siteTitle,
-    component_config: {
-      header: true,
-      banner: true,
-      product_intro: true,
-      customer_case: true,
-      footer: true
-    },
-    theme_color: '#2D3446' // 默认主题色
-  });
-
-  // 2. 创建管理员账号（密码加密存储）
-  const hashedPassword = await bcrypt.hash(adminPassword, 10);
-  await User.create({
-    username: 'admin',
-    password: hashedPassword,
-    is_admin: true
-  });
-
-  logger.info('网站初始化成功');
-  res.json({ message: '初始化成功' });
 };

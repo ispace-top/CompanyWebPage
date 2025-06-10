@@ -58,11 +58,18 @@ input {
   border-radius: 4px;
 }
 .submit-btn {
-  padding: 0.5rem 2rem;
-  background: #2D3446;
-  color: white;
+  background: var(--primary-color);
+  color: var(--text-light);
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-sm) var(--spacing-lg);
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 </style>

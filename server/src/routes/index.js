@@ -10,6 +10,7 @@ const notificationCtrl = require('../controllers/notification');
 // 无需认证的接口（注册、登录、公共信息查询）
 router.get('/site-info', siteInfoCtrl.getSiteInfo); // 公共接口：获取网站信息
 router.get('/company-info', companyInfoCtrl.getCompanyInfo); // 公共接口：获取公司信息
+router.get('/check-initialized', siteInfoCtrl.checkInitialized); // 新增：供前端检查初始化状态的接口
 router.post('/register', validateUserInput(['username', 'password']), userCtrl.registerAdmin); // 注册接口（仅首次可用）
 router.post('/login', validateUserInput(['username', 'password']), userCtrl.login); // 登录接口（获取token）
 
